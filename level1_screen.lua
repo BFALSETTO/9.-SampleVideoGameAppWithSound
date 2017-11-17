@@ -13,7 +13,6 @@
 -- Use Composer Libraries
 local composer = require( "composer" )
 local widget = require( "widget" )
-
 -----------------------------------------------------------------------------------------
 
 -- Naming Scene
@@ -34,6 +33,11 @@ local bkg_image
 -----------------------------------------------------------------------------------------
 -- GLOBAL SCENE FUNCTIONS
 -----------------------------------------------------------------------------------------
+
+local function BackTransition( )
+    composer.gotoScene( "main_menu", {effect = "zoomOutInFadeRotate", time = 500})
+    backButton.isVisible = false
+end
 
 -- The function called when the screen doesn't exist
 function scene:create( event )
@@ -123,6 +127,26 @@ function scene:destroy( event )
     -- Example: remove display objects, save state, etc.
 
 end -- function scene:destroy( event )
+
+-- Creating Back Button
+    backButton = widget.newButton( 
+    {
+        -- Setting Position
+        x = display.contentWidth*1/8,
+        y = display.contentHeight*15/16,
+
+        -- Setting Dimensions
+        -- width = 1000,
+        -- height = 106,
+
+        -- Setting Visual Properties
+        defaultFile = "Images/Back Button Unpressed.png",
+        overFile = "Images/Back Button Pressed.png",
+
+        -- Setting Functional Properties
+        onRelease = BackTransition
+
+    } )
 
 -----------------------------------------------------------------------------------------
 -- EVENT LISTENERS
